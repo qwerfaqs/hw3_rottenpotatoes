@@ -30,4 +30,10 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  rating_list.split(',').each {|item| step %{I #{ uncheck ? 'uncheck' : 'check' } "ratings_#{item.strip}"} }
+  
+end
+Then /I should see all of the movies/ do
+  
+  all("table#movies tr").count.should = Movie.all().count
 end
