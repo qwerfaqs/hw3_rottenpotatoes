@@ -34,6 +34,7 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   
 end
 Then /I should see all of the movies/ do
-  
-  all("table#movies tr").count.should = Movie.all().count
+  count = page.all("table#movies tr").count - 1 # le tengo que restar la cabecera
+  expected_count = Movie.all().count
+  assert count == expected_count, "Count movies (#{count}) don't match expected (#{expected_count})"
 end
