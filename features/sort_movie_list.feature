@@ -23,7 +23,16 @@ Background: movies have been added to database
 
 Scenario: sort movies alphabetically
   # your steps here
+  Given I check the following ratings: PG, R, G, PG-13, NC-17
+  When I press "ratings_submit"
+  And I follow "title_header"
+  Then I should see "Aladdin" before "Amelie"
+  And I should see "Chocolat" before "Amelie"
+
 
 Scenario: sort movies in increasing order of release date
-  # your steps here
-
+  # your steps here 
+  Given I check the following ratings: PG, R, G, PG-13, NC-17
+  When I press "ratings_submit"
+  And I follow "release_date_header"
+  Then I should see "2001: A Space Odyssey" before "Aladdin"
